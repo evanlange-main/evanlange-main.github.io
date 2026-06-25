@@ -45,10 +45,10 @@
       theme: {
         extend: {
           colors: {
-            base:    '#0C1428',
-            surface: '#111B36',
-            panel:   '#16213F',
-            card:    '#1A2748',
+            base:    '#111C34',
+            surface: '#16223F',
+            panel:   '#1B2849',
+            card:    '#1F2D52',
             line:    '#2A3A5E',
             ink:     '#F3F6FC',
             muted:   '#AAB7CE',
@@ -169,7 +169,7 @@
   </script>
 </head>
 
-<body class="bg-base font-sans text-ink antialiased selection:text-white">
+<body class="bg-base font-sans text-ink antialiased selection:text-white pb-24 sm:pb-0">
 
   <!-- Inline SVG sprite: the Spriggan logo (cyan squircle + navy S-with-arrow, vectorized from the brand mark) -->
   <svg width="0" height="0" class="absolute" aria-hidden="true" focusable="false">
@@ -268,7 +268,7 @@
                 <input type="hidden" name="from_name" value="Spriggan Waitlist" />
                 <input type="hidden" name="subject" value="🌱 New Spriggan beta signup" />
                 <input type="checkbox" name="botcheck" class="hidden" style="display:none" tabindex="-1" autocomplete="off" />
-                <div class="flex flex-col gap-3 sm:flex-row">
+                <div class="hidden gap-3 sm:flex">
                   <label for="email-hero" class="sr-only">Email address</label>
                   <input id="email-hero" type="email" name="email" required autocomplete="email" placeholder="you@email.com"
                     class="field w-full flex-1 rounded-xl border border-line bg-white/[.03] px-5 py-4 text-base text-ink placeholder-muted/60" />
@@ -761,6 +761,26 @@
       </p>
     </div>
   </footer>
+
+  <!-- ============================ MOBILE STICKY WAITLIST BAR ============================ -->
+  <div class="waitlist-wrap fixed inset-x-0 bottom-0 z-40 border-t border-line bg-base/90 px-4 pt-3 backdrop-blur-md sm:hidden"
+       style="padding-bottom:calc(0.75rem + env(safe-area-inset-bottom));">
+    <form class="waitlist-form flex items-center gap-2" novalidate>
+      <input type="hidden" name="access_key" value="ae376767-c81d-42a8-b2cb-27325dbe3a44" />
+      <input type="hidden" name="from_name" value="Spriggan Waitlist" />
+      <input type="hidden" name="subject" value="🌱 New Spriggan beta signup" />
+      <input type="checkbox" name="botcheck" class="hidden" style="display:none" tabindex="-1" autocomplete="off" />
+      <label for="email-sticky" class="sr-only">Email address</label>
+      <input id="email-sticky" type="email" name="email" required autocomplete="email" placeholder="you@email.com"
+        class="field w-full min-w-0 flex-1 rounded-xl border border-line bg-white/[.05] px-4 py-3 text-sm text-ink placeholder-muted/60" />
+      <button type="submit" class="btn-primary inline-flex shrink-0 items-center justify-center gap-1.5 whitespace-nowrap rounded-xl px-4 py-3 text-sm">
+        Join the beta
+        <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.4"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" /></svg>
+      </button>
+    </form>
+    <p class="form-error mt-2 hidden text-xs text-red-300"></p>
+    <div class="waitlist-success hidden rounded-xl border border-leaf/30 bg-leaf/10 px-4 py-2.5 text-center text-sm font-semibold text-leaf">You’re on the list! 🎉 We’ll email your invite soon.</div>
+  </div>
 
   <!-- ============================ SCRIPTS ============================ -->
   <script>
