@@ -85,9 +85,11 @@
     .text-gradient { color: #ffffff; -webkit-text-fill-color: #ffffff; background: none; }
 
     /* Soft glowing accent blobs */
-    .glow { position: absolute; border-radius: 9999px; filter: blur(90px); pointer-events: none; z-index: 0; opacity: 0; }
-    /* Glows stay hidden until the layout (Tailwind CDN) is fully applied, then appear (no fade) so they never flash out of place on load */
-    html.ready .glow { opacity: 1; }
+    .glow { position: absolute; border-radius: 9999px; filter: blur(90px); pointer-events: none; z-index: 0; opacity: 0; transition: opacity .8s ease; }
+    /* Glows stay hidden until layout (Tailwind CDN) is applied so they never flash out of place on load */
+    html.loaded .glow:not(.glow-chart) { opacity: 1; }   /* ambient glows: fade in right at load */
+    .glow-chart { transition: opacity 1.2s ease; }       /* slower, smoother fade for the chart glow */
+    html.ready .glow-chart { opacity: 1; }               /* chart glow: fade in after the delay (1.2s fade) */
 
     /* Subtle dotted grid backdrop */
     .grid-bg {
@@ -307,7 +309,7 @@
           <!-- Hero visual (decorative, inline SVG only) -->
           <div class="reveal relative mt-20 lg:col-span-5 lg:mt-0">
             <div class="relative mx-auto max-w-sm sm:max-w-md">
-              <div class="glow" style="inset:10% 5%;background:radial-gradient(circle,rgba(28,123,244,.35),transparent 65%);"></div>
+              <div class="glow glow-chart" style="inset:10% 5%;background:radial-gradient(circle,rgba(28,123,244,.35),transparent 65%);"></div>
               <div class="card-grad relative rounded-3xl p-5 backdrop-blur-sm sm:p-6">
                 <div class="flex items-center justify-between">
                   <div class="flex items-center gap-2.5">
@@ -990,10 +992,12 @@
   <!-- Reveal glow blobs only after full load, so they don't flash out of place before Tailwind applies -->
   <script>
     (function () {
-      function show() { document.documentElement.classList.add('ready'); }
-      function schedule() { setTimeout(show, 800); }
-      if (document.readyState === 'complete') schedule();
-      else window.addEventListener('load', schedule);
+      function loaded() {
+        document.documentElement.classList.add('loaded');                         // ambient glows fade in now
+        setTimeout(function () { document.documentElement.classList.add('ready'); }, 800); // chart glow fades in after delay
+      }
+      if (document.readyState === 'complete') loaded();
+      else window.addEventListener('load', loaded);
     })();
   </script>
 </body>
