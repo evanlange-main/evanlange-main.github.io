@@ -85,7 +85,9 @@
     .text-gradient { color: #ffffff; -webkit-text-fill-color: #ffffff; background: none; }
 
     /* Soft glowing accent blobs */
-    .glow { position: absolute; border-radius: 9999px; filter: blur(90px); pointer-events: none; z-index: 0; }
+    .glow { position: absolute; border-radius: 9999px; filter: blur(90px); pointer-events: none; z-index: 0; opacity: 0; }
+    /* Glows stay hidden until the layout (Tailwind CDN) is fully applied, then appear (no fade) so they never flash out of place on load */
+    html.ready .glow { opacity: 1; }
 
     /* Subtle dotted grid backdrop */
     .grid-bg {
@@ -140,6 +142,7 @@
     @media (prefers-reduced-motion: reduce) {
       .reveal { opacity: 1 !important; transform: none !important; transition: none; }
       .animate-float, .animate-pulse-glow { animation: none !important; }
+      .glow { transition: none; }
       html { scroll-behavior: auto; }
     }
   </style>
@@ -258,7 +261,7 @@
             </h1>
 
             <p class="reveal mx-auto mt-5 max-w-xl text-sm leading-snug text-muted sm:mt-6 sm:text-lg sm:leading-relaxed lg:mx-0">
-              Spriggan curates a personalized portfolio around your goals in a brand new way that makes investing intuitive and accessible for everyone. Join the beta for a first look at how Spriggan is about to change the way people invest.
+              Spriggan reinvents portfolio automation, so financial stability and growth is attainable for anyone. Join the beta for a first look at how Spriggan is changing the way people invest.
             </p>
 
             <!-- PRIMARY WAITLIST FORM (front & center) -->
@@ -981,6 +984,16 @@
       chip.addEventListener('keydown', function (e) {
         if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); undo(); }
       });
+    })();
+  </script>
+
+  <!-- Reveal glow blobs only after full load, so they don't flash out of place before Tailwind applies -->
+  <script>
+    (function () {
+      function show() { document.documentElement.classList.add('ready'); }
+      function schedule() { setTimeout(show, 800); }
+      if (document.readyState === 'complete') schedule();
+      else window.addEventListener('load', schedule);
     })();
   </script>
 </body>
