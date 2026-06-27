@@ -813,6 +813,79 @@
     <div class="waitlist-success hidden rounded-xl border border-leaf/30 bg-leaf/10 px-4 py-2.5 text-center text-sm font-semibold text-leaf">You’re on the list! 🎉 We’ll email your invite soon.</div>
   </div>
 
+  <!-- ============================ BETA REQUEST MODAL ============================ -->
+  <div id="beta-modal" class="fixed inset-0 z-[60] hidden items-center justify-center px-4 py-6" role="dialog" aria-modal="true" aria-labelledby="beta-modal-title">
+    <div id="beta-modal-backdrop" class="absolute inset-0 bg-black/70 backdrop-blur-sm"></div>
+    <div class="waitlist-wrap card-grad relative z-10 max-h-[92vh] w-full max-w-lg overflow-y-auto rounded-3xl border border-line p-6 shadow-[0_30px_80px_-20px_rgba(0,0,0,.8)] sm:p-8">
+      <div class="glow" style="top:-30%;left:50%;transform:translateX(-50%);width:380px;height:300px;background:radial-gradient(circle,rgba(28,123,244,.30),transparent 65%);opacity:.9;"></div>
+
+      <button type="button" id="beta-modal-close" aria-label="Close" class="absolute right-4 top-4 z-10 inline-flex h-9 w-9 items-center justify-center rounded-lg border border-line text-muted transition hover:border-cyan2/50 hover:text-ink">
+        <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 6l12 12M18 6 6 18" /></svg>
+      </button>
+
+      <div class="relative">
+        <div class="flex items-center gap-2.5">
+          <svg class="h-9 w-9 drop-shadow-[0_4px_14px_rgba(43,211,237,.45)]" aria-hidden="true"><use href="#logo" /></svg>
+          <span class="text-lg font-bold tracking-tight">Spriggan</span>
+        </div>
+        <h2 id="beta-modal-title" data-hide-on-success class="mt-5 text-2xl font-extrabold tracking-tight sm:text-3xl">Request your <span class="text-gradient">beta invite</span></h2>
+        <p data-hide-on-success class="mt-2 text-sm text-muted">Tell us a little about you and we’ll be in touch shortly with your access details.</p>
+
+        <form class="waitlist-form mt-6" id="beta-modal-form" novalidate>
+          <input type="hidden" name="access_key" value="ae376767-c81d-42a8-b2cb-27325dbe3a44" />
+          <input type="hidden" name="from_name" value="Spriggan Waitlist" />
+          <input type="hidden" name="subject" value="🌱 New Spriggan beta signup" />
+          <input type="checkbox" name="botcheck" class="hidden" style="display:none" tabindex="-1" autocomplete="off" />
+
+          <div class="grid gap-3 sm:grid-cols-2">
+            <div>
+              <label for="beta-first" class="mb-1.5 block text-xs font-medium text-muted">First name</label>
+              <input id="beta-first" type="text" name="first_name" required autocomplete="given-name" placeholder="Jane"
+                class="field w-full rounded-xl border border-line bg-white/[.03] px-4 py-3 text-base text-ink placeholder-muted/60" />
+            </div>
+            <div>
+              <label for="beta-last" class="mb-1.5 block text-xs font-medium text-muted">Last name</label>
+              <input id="beta-last" type="text" name="last_name" required autocomplete="family-name" placeholder="Doe"
+                class="field w-full rounded-xl border border-line bg-white/[.03] px-4 py-3 text-base text-ink placeholder-muted/60" />
+            </div>
+          </div>
+
+          <div class="mt-3">
+            <label for="beta-email" class="mb-1.5 block text-xs font-medium text-muted">Email</label>
+            <input id="beta-email" type="email" name="email" required autocomplete="email" placeholder="you@email.com"
+              class="field w-full rounded-xl border border-line bg-white/[.03] px-4 py-3 text-base text-ink placeholder-muted/60" />
+          </div>
+
+          <div class="mt-3">
+            <label for="beta-reason" class="mb-1.5 block text-xs font-medium text-muted">Why do you want in? <span class="text-muted/60">(optional)</span></label>
+            <textarea id="beta-reason" name="reason" rows="3" placeholder="What are you hoping Spriggan can help you with?"
+              class="field w-full resize-none rounded-xl border border-line bg-white/[.03] px-4 py-3 text-base text-ink placeholder-muted/60"></textarea>
+          </div>
+
+          <button type="submit" class="btn-primary mt-5 inline-flex w-full items-center justify-center gap-2 rounded-xl px-7 py-4 text-base">
+            Join the beta
+            <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" /></svg>
+          </button>
+          <p class="form-error mt-3 hidden text-sm text-red-300"></p>
+          <p class="mt-4 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-xs text-muted">
+            <span class="inline-flex items-center gap-1.5"><svg class="h-4 w-4 text-leaf" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" /></svg>Free to join</span>
+            <span class="inline-flex items-center gap-1.5"><svg class="h-4 w-4 text-leaf" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" /></svg>No commitment</span>
+            <span class="inline-flex items-center gap-1.5"><svg class="h-4 w-4 text-leaf" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" /></svg>Bank-grade security</span>
+          </p>
+        </form>
+
+        <!-- Success state -->
+        <div class="waitlist-success mt-5 hidden rounded-2xl border border-leaf/30 bg-leaf/10 p-6 text-center">
+          <div class="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-leaf/20 text-leaf">
+            <svg class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" /></svg>
+          </div>
+          <p class="text-lg font-bold text-ink">You’re on the list! 🎉</p>
+          <p class="mt-1 text-sm text-muted">Thanks for requesting access — we’ll email you shortly with your beta invite and next steps.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- ============================ SCRIPTS ============================ -->
   <script>
     (function () {
@@ -873,6 +946,14 @@
         form.addEventListener('submit', function (e) {
           e.preventDefault();
 
+          // Inline email boxes are just an entry point: open the full modal,
+          // pre-filled with whatever email was typed. Only the modal form submits.
+          if (form.id !== 'beta-modal-form') {
+            var typed = form.querySelector('input[type="email"]');
+            openBetaModal(typed ? typed.value.trim() : '');
+            return;
+          }
+
           // Native validation first
           if (!form.checkValidity()) { form.reportValidity(); return; }
 
@@ -899,6 +980,7 @@
               if (r.ok && r.json && r.json.success) {
                 if (successEl) {
                   form.classList.add('hidden');
+                  if (wrap) wrap.querySelectorAll('[data-hide-on-success]').forEach(function (el) { el.classList.add('hidden'); });
                   successEl.classList.remove('hidden');
                   successEl.animate(
                     [{ opacity: 0, transform: 'translateY(10px) scale(.98)' }, { opacity: 1, transform: 'none' }],
@@ -920,6 +1002,62 @@
               }
             });
         });
+      });
+
+      // Beta request modal (collects first/last name + optional reason)
+      var betaModal = document.getElementById('beta-modal');
+      var betaForm = document.getElementById('beta-modal-form');
+      var arrowSvg = '<svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" /></svg>';
+
+      function resetBetaModal() {
+        if (!betaForm) return;
+        var wrap = betaForm.closest('.waitlist-wrap');
+        var succ = wrap ? wrap.querySelector('.waitlist-success') : null;
+        var err = betaForm.querySelector('.form-error');
+        var b = betaForm.querySelector('button[type="submit"]');
+        betaForm.classList.remove('hidden');
+        if (wrap) wrap.querySelectorAll('[data-hide-on-success]').forEach(function (el) { el.classList.remove('hidden'); });
+        if (succ) succ.classList.add('hidden');
+        if (err) { err.classList.add('hidden'); err.textContent = ''; }
+        if (b) {
+          b.disabled = false;
+          b.classList.remove('opacity-70', 'cursor-wait');
+          b.innerHTML = 'Join the beta ' + arrowSvg;
+        }
+      }
+
+      function openBetaModal(prefillEmail) {
+        if (!betaModal) return;
+        resetBetaModal();
+        var emailField = document.getElementById('beta-email');
+        if (emailField && prefillEmail) emailField.value = prefillEmail;
+        betaModal.classList.remove('hidden');
+        betaModal.classList.add('flex');
+        document.body.classList.add('overflow-hidden');
+        setTimeout(function () {
+          var first = document.getElementById('beta-first');
+          if (first) first.focus();
+        }, 40);
+      }
+
+      function closeBetaModal() {
+        if (!betaModal) return;
+        betaModal.classList.add('hidden');
+        betaModal.classList.remove('flex');
+        document.body.classList.remove('overflow-hidden');
+      }
+
+      // Every "Join the beta" link that pointed at #waitlist now opens the modal.
+      document.querySelectorAll('a[href="#waitlist"]').forEach(function (a) {
+        a.addEventListener('click', function (e) { e.preventDefault(); openBetaModal(''); });
+      });
+
+      var betaCloseBtn = document.getElementById('beta-modal-close');
+      var betaBackdrop = document.getElementById('beta-modal-backdrop');
+      if (betaCloseBtn) betaCloseBtn.addEventListener('click', closeBetaModal);
+      if (betaBackdrop) betaBackdrop.addEventListener('click', closeBetaModal);
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && betaModal && !betaModal.classList.contains('hidden')) closeBetaModal();
       });
     })();
   </script>
