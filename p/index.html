@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#111C34" />
+  <title>Spriggan — Community Post</title>
+
+  <!-- Open Graph / Twitter. NOTE: GitHub Pages is static, so these are generic (not per-post).
+       For real per-post unfurls (title/body/preview image on X, Reddit, iMessage) you'd need a
+       serverless renderer that injects post-specific og:* tags. -->
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Spriggan" />
+  <meta property="og:title" content="A post on Spriggan" />
+  <meta property="og:description" content="Open this post in the Spriggan app to read it and join the conversation." />
+  <meta property="og:url" content="https://spriggan.com/p/" />
+  <meta property="og:image" content="https://spriggan.com/logo.png" />
+  <meta name="twitter:card" content="summary" />
+
+  <style>
+    :root {
+      --base:#111C34; --surface:#16223F; --card:#1F2D52; --line:#2A3A5E;
+      --ink:#F3F6FC; --muted:#AAB7CE; --blue:#1C7BF4; --cyan:#2BD3ED;
+    }
+    * { box-sizing:border-box; }
+    html,body { margin:0; height:100%; }
+    body {
+      background:radial-gradient(1200px 600px at 50% -10%, #16223F 0%, var(--base) 60%);
+      color:var(--ink);
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+      display:flex; align-items:center; justify-content:center; padding:24px;
+    }
+    .card {
+      width:100%; max-width:420px; background:var(--surface);
+      border:1px solid var(--line); border-radius:20px; padding:28px 24px;
+      box-shadow:0 20px 60px rgba(0,0,0,.45); text-align:center;
+    }
+    .badge {
+      width:56px; height:56px; border-radius:16px; margin:0 auto 14px;
+      display:flex; align-items:center; justify-content:center;
+      background:linear-gradient(135deg,var(--cyan),#15BCE0); color:var(--base);
+      font-weight:800; font-size:30px;
+    }
+    h1 { font-size:20px; margin:6px 0 4px; }
+    p.sub { color:var(--muted); font-size:14px; margin:0 0 22px; line-height:1.5; }
+    a.btn {
+      display:block; text-decoration:none; border-radius:999px; padding:13px 18px;
+      font-weight:700; font-size:15px; margin:10px 0;
+    }
+    a.primary { background:var(--blue); color:#fff; }
+    a.store { background:var(--card); color:var(--ink); border:1px solid var(--line); }
+    a.ghost { background:transparent; color:var(--muted); font-weight:600; font-size:13px; }
+    .row { display:flex; gap:10px; }
+    .row a { flex:1; }
+    .fine { color:var(--muted); font-size:12px; margin-top:16px; }
+    .fine a { color:var(--cyan); }
+  </style>
+</head>
+<body>
+  <main class="card">
+    <div class="badge">S</div>
+    <h1>Open this post in Spriggan</h1>
+    <p class="sub">Spriggan is an AI-powered investing app. Get the app to read this post, comment, and follow the securities you care about.</p>
+
+    <a id="open" class="btn primary" href="#">Open in the app</a>
+
+    <div class="row">
+      <a id="ios" class="btn store" href="#" rel="noopener">App&nbsp;Store</a>
+      <a id="android" class="btn store" href="#" rel="noopener">Google&nbsp;Play</a>
+    </div>
+
+    <a class="btn ghost" href="https://spriggan.com/">Continue to spriggan.com →</a>
+
+    <p class="fine">Trouble opening? Make sure the Spriggan app is installed, then tap
+      <a id="retry" href="#">open in the app</a> again.</p>
+  </main>
+
+  <script>
+    // --- config (fill these in once the apps are published) ---
+    var APP_STORE_URL = "https://apps.apple.com/app/id0000000000";                  // TODO: real App Store id
+    var PLAY_STORE_URL = "https://play.google.com/store/apps/details?id=com.testbed.testbed"; // package is correct
+
+    // --- resolve the post id from /p/<id> (via the 404 redirect) or ?id=<id> ---
+    function postId() {
+      var q = new URLSearchParams(location.search).get("id");
+      if (q) return q.trim();
+      var m = (location.pathname || "").match(/^\/p\/([^\/?#]+)/);
+      return m ? decodeURIComponent(m[1]) : "";
+    }
+    var id = postId();
+    var deep = id ? ("spriggan://post/" + encodeURIComponent(id)) : "spriggan://";
+
+    document.getElementById("ios").href = APP_STORE_URL;
+    document.getElementById("android").href = PLAY_STORE_URL;
+    document.getElementById("open").href = deep;
+    document.getElementById("retry").href = deep;
+
+    function tryOpenApp() {
+      // Best-effort: if verified App Links / Universal Links are set up and the app is installed,
+      // the OS opens the app before this page ever loads. This is the fallback attempt.
+      if (id) window.location.href = deep;
+    }
+    document.getElementById("open").addEventListener("click", function (e) { e.preventDefault(); tryOpenApp(); });
+    document.getElementById("retry").addEventListener("click", function (e) { e.preventDefault(); tryOpenApp(); });
+
+    // Auto-attempt on mobile only (desktop just shows the store/continue options).
+    if (/Android|iPhone|iPad|iPod/i.test(navigator.userAgent)) { setTimeout(tryOpenApp, 300); }
+  </script>
+</body>
+</html>

@@ -1,0 +1,17 @@
+{
+  "applinks": {
+    "apps": [],
+    "details": [
+      {
+        "appIDs": ["HCV362625N.com.spriggan.Spriggan"],
+        "components": [
+          { "/": "/auth*", "comment": "OAuth/passkey callback" },
+          { "/": "/p/*", "comment": "Shared post deep link" }
+        ]
+      }
+    ]
+  },
+  "webcredentials": {
+    "apps": ["HCV362625N.com.spriggan.Spriggan"]
+  }
+}

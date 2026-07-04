@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Redirecting…</title>
+  <!-- GitHub Pages has no server-side rewrites, so a clean post link like
+       https://spriggan.com/p/<id> 404s here. We map it onto /p/?id=<id>, which the static
+       /p/index.html serves (HTTP 200). Any other unknown path goes home. -->
+  <script>
+    (function () {
+      var p = location.pathname || "";
+      var m = p.match(/^\/p\/([^\/?#]+)/);
+      if (m && m[1]) {
+        location.replace("/p/?id=" + encodeURIComponent(decodeURIComponent(m[1])) + location.hash);
+      } else {
+        location.replace("/");
+      }
+    })();
+  </script>
+</head>
+<body></body>
+</html>

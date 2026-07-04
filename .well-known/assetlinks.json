@@ -1,0 +1,15 @@
+[
+  {
+    "relation": [
+      "delegate_permission/common.get_login_creds",
+      "delegate_permission/common.handle_all_urls"
+    ],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.testbed.testbed",
+      "sha256_cert_fingerprints": [
+        "35:C4:09:6F:AC:5A:60:A7:C2:CC:9B:BA:06:27:6F:27:0C:94:B5:6C:E9:1B:12:B0:BD:51:FC:AE:D4:93:2C:A9"
+      ]
+    }
+  }
+]
